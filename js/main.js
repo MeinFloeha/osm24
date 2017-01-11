@@ -82,7 +82,7 @@ function showNoteMessage(header,body,callback,lon,lat){
            badge='<span class="badge glyphicon glyphicon-remove-sign" style="background-color:#b94a48;">';
            status="danger";
          }
-         html+='<tr class="'+status+'"><td><a href="//www.openstreetmap.org/browse/note/'+prop.id+'"  target="_blank">'+prop.id+'</a></td><td>'+badge+prop.status+'</span></td><td>'+prop.comments[0].html+'</a></td>';
+         html+='<tr class="'+status+'"><td><a href="//www.openstreetmap.org/browse/note/'+prop.id+'"  target="_blank">'+prop.id+'</a></td><td>'+badge+prop.status+'</span></td>';
          added=1;
        });
   
