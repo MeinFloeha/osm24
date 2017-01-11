@@ -200,9 +200,8 @@ POI.prototype.getInfoBox = function(){
 
       content+='</div>';
       //link
-      var link = '<iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=27504&SSL=1"></iframe>';
       var container = $('<div />');
-      container.html('<div class="tabbable tabs-below">'+content+tabs+'</div>'+link);
+      container.html('<div class="tabbable tabs-below">'+content+tabs+'</div>');
       return [container[0], 'http://osm24.eu/index.php?id='+this.element.id+'#!18/'+this.element.lat+'/'+this.element.lon+'/' ];
 };
 
