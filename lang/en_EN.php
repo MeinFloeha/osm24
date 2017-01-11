@@ -142,6 +142,7 @@ define('PANEL_OFFICE_ARCHITECT','Architect');
 define('PANEL_OFFICE_ASSOCIATION','Association');
 define('PANEL_OFFICE_LAWYER','Lawyer');
 define('PANEL_OFFICE_NOTARY','Notary');
+define('PANEL_OFFICE_POST_OFFICE','Post office');
 
 define('PANEL_CRAFT_LIST','Type');
 define('PANEL_CRAFT_ALL','All');
@@ -349,6 +350,7 @@ define('JS_STATUS','Status');
 define('JS_LOADING','Loading...');
 define('JS_PLEASE_ZOOM_IN','Please zoom in');
 define('JS_OPEN','Open');
+define('JS_OPEN_OSM','Open in OSM');
 define('JS_LAST_HOUR','Last hour');
 define('JS_CLOSE','Closed');
 define('JS_NO_DATA','No data');

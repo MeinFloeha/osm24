@@ -143,6 +143,7 @@ define ('PANEL_OFFICE_ARCHITECT', 'Архітектор');
 define ('PANEL_OFFICE_ASSOCIATION', 'Товариство');
 define ('PANEL_OFFICE_LAWYER', 'Юрист');
 define ('PANEL_OFFICE_NOTARY', 'Нотаріус');
+define('PANEL_OFFICE_POST_OFFICE','Post office');
 
 define ('PANEL_CRAFT_LIST', 'Професія');
 define ('PANEL_CRAFT_ALL', 'Усе');
@@ -351,6 +352,7 @@ define ('JS_STATUS', 'Статус');
 define ('JS_LOADING', 'Йде завантаження…');
 define ('JS_PLEASE_ZOOM_IN', 'Наблизьте мапу, щоб побачити об’єкти');
 define ('JS_OPEN', 'Відкрито');
+define('JS_OPEN_OSM','Open in OSM');
 define ('JS_LAST_HOUR', 'Остання година');
 define ('JS_CLOSE', 'Зачинено');
 define ('JS_NO_DATA', 'Дані');

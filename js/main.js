@@ -443,9 +443,10 @@ var zoomControl = L.control.zoom({
   map.on('locationerror', onLocationError);
 
   map.on('moveend', nominatimQuery);
-  map.on('popupopen', function() {
+  map.on('popupopen', function(e) {
     var href=$("#plusone-div").data("href");
     var size=$("#plusone-div").data("size");
+    e.popup._source.el.fetchAddress();
   });
   n=true;
   var href=$("#main-plus").data("href");

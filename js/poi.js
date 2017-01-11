@@ -10,7 +10,7 @@ var shop_icons=["alcohol",'antiques',"art",
 var leisure_icons=['pitch','swimming_pool','stadium','track','sports_centre'];
 var amenity_icons=['atm','bar','bank','biergarten','cafe','cinema','clinic','college','dentist','doctors','drinking_water',
 'fast_food','fuel','hospital','ice_cream','kindergarten','library','nightclub',
-'pub','pharmacy','restaurant','school','shelter','social_facility','stripclub','theatre','toilets','university','veterinary'];
+'pub','pharmacy','restaurant','school','shelter','social_facility','stripclub','theatre','toilets','university','veterinary','post_office'];
 var office_icons=[];
 var craft_icons=['key_cutter','clockmaker','glaziery','photographer','shoemaker','tailor'];
 var emergency_icons=['ambulance_station','defibrillator'];
@@ -149,15 +149,21 @@ POI.prototype.getInfoBox = function(){
   content+='<div class="tab-pane active container" id="basic" style="margin:0px;width:400px">';
 
   //name
-  content+='<h4><a href=\'http://osm24.eu/index.php?id='+this.element.id+'#!18/'+this.element.lat+'/'+this.element.lon+'/\'>' +((this.element.tags.hasOwnProperty("name")) ? this.element.tags["name"]:"----")+'</a> <div id="plusone-div" data-size="small" data-href=\'http://osm24.eu/index.php?id='+this.element.id+'#!18/'+this.element.lat+'/'+this.element.lon+'/\'></div></h4>';
+  content+='<h4><a href=\'http://osm24.eu/index.php?id='+this.element.id+'#!18/'+this.element.lat+'/'+this.element.lon+'/\'>' +(this.getName()?this.getName():"---")+'</a> <div id="plusone-div" data-size="small" data-href=\'http://osm24.eu/index.php?id='+this.element.id+'#!18/'+this.element.lat+'/'+this.element.lon+'/\'></div></h4>';
   //addr
-  content+='<small>'+((this.element.tags.hasOwnProperty("addr:city")) ? this.element.tags["addr:city"]+', ' : "")+((this.element.tags.hasOwnProperty("addr:street")) ? this.element.tags["addr:street"]+', ' : "")+((this.element.tags.hasOwnProperty("addr:housenumber")) ? this.element.tags["addr:housenumber"]+', ' : "")+'</small>';
-
+  if(this.element.tags.hasOwnProperty("addr:housenumber") && this.element.tags.hasOwnProperty("addr:street"))
+	  content+='<small>'+((this.element.tags.hasOwnProperty("addr:city")) ? this.element.tags["addr:city"]+', ' : "")+this.element.tags["addr:street"]+', ' +this.element.tags["addr:housenumber"]+'</small>';
+  else
+	  content+='<div id="'+this.element.type+this.element.id+'">'+lang_loading+'</div>';
   //net
   content+='<div>';
   content += this.__genItems({tag:['contact:email','email'],icon:'glyphicon glyphicon-envelope',href:'mailto:'});
   content += this.__genItems({tag:['contact:phone','phone'],icon:'glyphicon glyphicon-phone-alt',href:'tel:'});
-  content += this.__genItems({tag:['contact:website','website'],icon:'glyphicon glyphicon-globe',href:''});
+  content += this.__genItems({tag:['contact:website','website'],icon:'glyphicon glyphicon-globe',href:'',
+  hrefFunc:function(nn){
+	// some website values have no protocol indication, resulting in a misintrepretation of the URL (eg. http://osm24.eu/www.jeudepaume.org)
+	return (nn.indexOf('http://') == -1 && nn.indexOf('https://') == -1)?'http://'+nn:nn;
+  }});
 
   content += this.__genItems({tag:['contact:facebook'],icon:'glyphicon glyphicon-globe',name:"Facebook",href:'',hrefFunc: 
     function(nn){return ((nn.indexOf('/') === -1)?"http://facebook.com/":"")+nn;}});
@@ -187,9 +193,9 @@ POI.prototype.getInfoBox = function(){
 
       content+='</tbody></table>';
       if(this.element.id[0]!='w')
-        content+="<a href='http://www.openstreetmap.org/node/"+this.element.id+"' target='_blank'>Open OSM</a>";
+        content+="<a href='http://www.openstreetmap.org/node/"+this.element.id+"' target='_blank'>"+lang_open_osm+"</a>";
       else
-        content+="<a href='http://www.openstreetmap.org/way/"+this.element.id.substr(1)+"' target='_blank'>Open OSM</a>";
+        content+="<a href='http://www.openstreetmap.org/way/"+this.element.id.substr(1)+"' target='_blank'>"+lang_open_osm+"</a>";
 
       content+='</div>';
 
@@ -278,4 +284,47 @@ POI.prototype.updateShadow = function (now){
 	if(this.shadow==old)
 		return false;
 	return true;
+};
+
+/*
+	Determine the address of a POI, if it is unknown
+*/
+POI.prototype.fetchAddress = function(){
+	var typeTable = {"node":"N","way":"W","relation":"R"};
+	var addressDiv = this.element.type+this.element.id;
+	// if the address has not been determined yet
+	if($("#"+addressDiv).html() == lang_loading)
+	{
+		var requestData;
+		if(this.element.tags.hasOwnProperty("addr:housenumber"))
+		{
+			if(this.element.type)
+				requestData = {osm_type:typeTable[this.element.type],osm_id:this.element.id};
+			else
+				// way objects have no key type, no idea why
+				requestData = {osm_type:this.element.id[0].toUpperCase(),osm_id:this.element.id.substr(1)};
+		}
+		else
+			requestData = {lon:this.element.lon,lat:this.element.lat};
+		
+		$.ajax({
+			url: 'nominatim_reverse_proxy.php',
+			dataType: "json",
+			data: requestData,
+			number : this.element.tags["addr:housenumber"],
+			addressDiv : addressDiv,
+			success: function(nominatim){
+				var wayName = nominatim.address.road;
+				if(!wayName)wayName = nominatim.address.pedestrian;
+				if(!wayName)wayName = nominatim.address.footway;
+				var cityName = nominatim.address.city;
+				if(!cityName)cityName = nominatim.address.town;
+				if(!cityName)cityName = nominatim.address.village;
+				var displayedAddress = cityName?cityName:"";
+				displayedAddress += (wayName?", "+wayName:"");
+				displayedAddress += (this.number?", "+this.number:"");
+				$("#"+this.addressDiv).html('<small>'+displayedAddress+'</small>');
+			}
+		});
+	}
 };
