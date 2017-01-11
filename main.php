@@ -84,7 +84,7 @@ include("config.php");
             <li class="dropdown  btn-group btn-group-own ">
               <a class="dropdown-toggle btn-select" id="type" data-toggle="dropdown"><?php echo PANEL_EAT;?><span class="caret"></span></a>
               <ul class="dropdown-menu select-one-change sort">
-                <li><a id="all"  data-tag-pair="['amenity'='restaurant']@['amenity'='fast_food']@['amenity'='cafe']@['amenity'='ice_cream']@[shop]@[office]@[craft]@[sport]@[amenity=toilets]@[amenity=drinking_water]@['amenity'='pub']@['amenity'='bar']@['amenity'='nightclub']@['amenity'='biergarten']@['amenity'='stripclub']@[amenity='pharmacy']@[amenity='fuel']@['amenity'='bank']@['amenity'='atm']@['amenity'='cinema']@['amenity'='theatre']@['amenity'='college']@['amenity'='library']@['amenity'='university']@['amenity'='kindergarten']@[tourism]@['amenity'='clinic']@['amenity'='hospital']@['amenity'='dentist']@['amenity'='doctors']@['amenity'='veterinary']@['amenity'='social_facility']@['emergency'='ambulance_station']@['emergency'='defibrillator']@[amenity=post_office]" data-tag-type="main"><?php echo PANEL_ALL;?></a></li>
+                <li><a id="all"  data-tag-pair="['amenity'='restaurant']@['amenity'='fast_food']@['amenity'='cafe']@['amenity'='ice_cream']@[shop]@[office]@[craft]@[sport]@[amenity=toilets]@[amenity=drinking_water]@['amenity'='pub']@['amenity'='bar']@['amenity'='nightclub']@['amenity'='biergarten']@['amenity'='stripclub']@[amenity='pharmacy']@[amenity='fuel']@['amenity'='bank']@['amenity'='atm']@['amenity'='cinema']@['amenity'='theatre']@['amenity'='college']@['amenity'='library']@['amenity'='university']@['amenity'='kindergarten']@[tourism=information]['information'!='guidepost']['information'!='board']['information'!='map']['information'!='tactile_map']['information'!='tactile_model']@['amenity'='clinic']@['amenity'='hospital']@['amenity'='dentist']@['amenity'='doctors']@['amenity'='veterinary']@['amenity'='social_facility']@['emergency'='ambulance_station']@['emergency'='defibrillator']@[amenity=post_office]" data-tag-type="main"><?php echo PANEL_ALL;?></a></li>
                 <li class="divider"></li>                
                 <li><a id="craft"><?php echo PANEL_CRAFT;?></a></li>
                 <li><a id="health"><?php echo PANEL_HEALTH;?></a></li>
@@ -491,11 +491,11 @@ include("config.php");
             <li style="display:none;" class="dropdown  btn-group btn-group-own  visible-tourism">
               <a class="dropdown-toggle btn-select tag-default" id="tourism_type" data-toggle="dropdown" data-default-id="tourism_all" data-arrow><?php echo PANEL_TOURISM;?><span class="caret"></span></a>
               <ul class="dropdown-menu select-one dropdown-menu-long tag-parent">
-                <li><a id="tourism_all" data-tag-pair="[tourism]" data-tag-type="main"><?php echo PANEL_TOURISM_ALL;?></a></li>
+                <li><a id="tourism_all" data-tag-pair="[tourism=information]['information'!='guidepost']['information'!='board']['information'!='map']['information'!='tactile_map']['information'!='tactile_model']" data-tag-type="main"><?php echo PANEL_TOURISM_ALL;?></a></li>
                 <li class="divider"></li>
                 <li><a id="tourism_attraction" data-tag-pair="[tourism=attraction]@[tourism=viewpoint]@[tourism=museum]@[tourism=theme_park]@[tourism=zoo]" data-tag-type="main"><?php echo PANEL_TOURISM_ATTRACTION;?></a></li>
                 <li><a id="tourism_accommodation" data-tag-pair="[tourism=hotel]@[tourism=hostel]@[tourism=guest_house]@[tourism=camp_site]@[tourism=caravan_site]@[tourism=motel]@[tourism=alpine_hut]" data-tag-type="main"><?php echo PANEL_TOURISM_ACCOMMODATION;?></a></li>
-                <li><a id="tourism_information" data-tag-pair="[tourism=information]" data-tag-type="main"><?php echo PANEL_TOURISM_INFORMATION;?></a></li>
+                <li><a id="tourism_information" data-tag-pair="[tourism=information]['information'!='guidepost']['information'!='board']['information'!='map']['information'!='tactile_map']['information'!='tactile_model']" data-tag-type="main"><?php echo PANEL_TOURISM_INFORMATION;?></a></li>
               </ul>
             </li>
 
