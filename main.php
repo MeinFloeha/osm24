@@ -1,5 +1,6 @@
 <?php
 include("language.php");
+include("config.php");
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ include("language.php");
 
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>osm24.eu</title>
+    <title><?php echo $sitename; ?></title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/MarkerCluster.css"/>
@@ -76,7 +77,7 @@ include("language.php");
 -            Menu
 -          </button><table><tr><td>
           <a id="open-left"></a></td><td>
-          <i class="navbar-brand">osm24.eu</i></td></tr></table>
+          <i class="navbar-brand"><?php echo $sitename; ?></i></td></tr></table>
         </div>
         <div class="collapse navbar-collapse global-menu-data">
           <ul class="nav navbar-nav">
@@ -576,7 +577,7 @@ include("language.php");
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Osm24 <div id='main-plus' size="small" data-href='http://osm24.eu'></div></h4>
+          <h4 class="modal-title"><?php echo $sitename; ?></h4>
           <hr/>
         </div>
         <div class="modal-body">

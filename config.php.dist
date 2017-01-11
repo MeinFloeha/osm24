@@ -1,0 +1,6 @@
+<?php
+	// Copy config.php.dist to config.php an change your configuration parameters
+
+	// Name of your Site written in title and about box
+	$sitename = "OSM24";
+?>
