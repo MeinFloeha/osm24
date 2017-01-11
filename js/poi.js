@@ -179,9 +179,6 @@ POI.prototype.getInfoBox = function(){
         content+='<a href="https://github.com/ypid/opening_hours.js/commits/master/demo.html">Author</a></div>';
       }
 
-      //comments
-      content+='<div class="tab-pane" id="comments"><div id="disqus_thread"></div></div>';
-
       //tags
       content+='<div class="tab-pane" id="tags"><table class="table table-condensed">';
       content+="<thead><tr><th><b>"+lang_key+"</b></th><th><b>"+lang_value+"</b></th></tr></thead>";
